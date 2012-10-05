@@ -1,0 +1,5 @@
+[
+    {
+        "keys": ["ctrl+alt+d"], "command": "readme_please"
+    }
+]
