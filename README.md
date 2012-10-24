@@ -1,5 +1,34 @@
-#ReadmePlease
+ReadmePlease
+===========
 
-Sublime Text 2 plugin for quick access to installed packages README files.
+Overview
+--------
 
-Use `ctr+super+d` for OSX and Linux, `ctrl+alt+d` for Windows.
+ReadmePlease is a [Sublime Text 2](http://www.sublimetext.com/) plugin for quick access to README files of installed packages.
+
+Installation
+------------
+
+* via [PackageControl](http://wbond.net/sublime_packages/package_control)
+
+or
+
+* clone to your Sublime Text 2 `Packages` folder located at
+    * Windows: %APPDATA%\Sublime Text 2
+    * OS X: ~/Library/Application Support/Sublime Text 2
+    * Linux: ~/.config/sublime-text-2
+
+
+Keymaps
+-------
+
+* Windows and Linux `ctrl+alt+d` 
+* Mac OS `ctr+super+d`
+
+or enter `ReadmePlease` in command palette
+
+
+Contributors
+-----------
+
+Created by Aliaksei Shytkin [roadhump](https://twitter.com/roadhump)

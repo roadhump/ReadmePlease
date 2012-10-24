@@ -12,13 +12,11 @@ class ReadmePleaseCommand(sublime_plugin.WindowCommand):
 
         self.helps = []
         
-        
         for path in package_names:
             package_path = os.path.join(sublime.packages_path(), path)
             if (os.path.isdir(package_path)):
                 fs = [file for file in os.listdir(package_path) if re.match('readme', file, flags=re.IGNORECASE)]
                 if len(fs):
-                    
                     self.helps.append([path, fs[0], os.path.join(package_path, fs[0])])
 
         self.helps.sort()
