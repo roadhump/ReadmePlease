@@ -4,14 +4,14 @@ import re
 
 class ReadmePleaseCommand(sublime_plugin.WindowCommand):
 
-    def description(self): 
+    def description(self):
         'Quick access to packages README'
 
     def run(self):
         package_names = os.listdir(sublime.packages_path())
 
         self.helps = []
-        
+
         for path in package_names:
             package_path = os.path.join(sublime.packages_path(), path)
             if (os.path.isdir(package_path)):
@@ -24,5 +24,6 @@ class ReadmePleaseCommand(sublime_plugin.WindowCommand):
 
     def onSelect(self, i):
         if (i != -1):
-            help = self.helps[i][2]
-            self.window.open_file(help)
+            help = self.helps[i]
+            help_view = self.window.open_file(help[2])
+            help_view.set_read_only(True)

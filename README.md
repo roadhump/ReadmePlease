@@ -19,13 +19,10 @@ or
     * Linux: ~/.config/sublime-text-2
 
 
-Keymaps
+Usage
 -------
 
-* Windows and Linux `ctrl+alt+d` 
-* Mac OS `ctr+super+d`
-
-or enter `ReadmePlease` in command palette
+Enter `ReadmePlease` in command palette
 
 
 Contributors
