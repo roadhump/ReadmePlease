@@ -20,7 +20,7 @@ class ReadmePleaseCommand(sublime_plugin.WindowCommand):
                     self.helps.append([path, fs[0], os.path.join(package_path, fs[0])])
 
         self.helps.sort()
-        self.window.show_quick_panel(map(lambda x: [x[0], x[1]], self.helps), self.onSelect)
+        self.window.show_quick_panel(list(map(lambda x: [x[0], x[1]], self.helps)), self.onSelect)
 
     def onSelect(self, i):
         if (i != -1):
