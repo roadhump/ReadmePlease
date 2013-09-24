@@ -4,35 +4,26 @@ import re
 
 class ReadmePleaseCommand(sublime_plugin.WindowCommand):
 
-  def description(self):
-    'Quick access to packages README'
+    def description(self):
+        'Quick access to packages README'
 
-  def run(self):
+    def run(self):
+        package_names = os.listdir(sublime.packages_path())
 
-    variations = ["README.*", "readme.*", "Readme.*", "ReadMe.*"]
+        self.helps = []
 
-    self.helps = []
+        for path in package_names:
+            package_path = os.path.join(sublime.packages_path(), path)
+            if (os.path.isdir(package_path)):
+                fs = [file for file in os.listdir(package_path) if re.match('readme', file, flags=re.IGNORECASE)]
+                if len(fs):
+                    self.helps.append([path, fs[0], os.path.join(package_path, fs[0])])
 
-    for spelling in variations:
-        readmes = sublime.find_resources(spelling)
+        self.helps.sort()
+        self.window.show_quick_panel(list(map(lambda x: [x[0], x[1]], self.helps)), self.onSelect)
 
-        for readme in readmes:
-
-            package = (str(readme).split('/'))
-            plength = (len(package))
-
-            # weeding out the readme files from package libraries.
-            if plength < 7:
-                package_name = package[plength - 2]
-                readme_name = package[plength - 1]
-                self.helps.append([package_name, readme_name, readme])
-
-
-    self.helps.sort()
-    self.window.show_quick_panel(list(map(lambda x: [x[0], x[1]], self.helps)), self.onSelect)
-
-  def onSelect(self, i):
-    if (i != -1):
-        help = self.helps[i]
-
-        help_view = sublime.active_window().run_command("open_file", { "file": "${packages}/%s/%s" % (help[0],help[1])})
+    def onSelect(self, i):
+        if (i != -1):
+            help = self.helps[i]
+            help_view = self.window.open_file(help[2])
+            help_view.set_read_only(True)
