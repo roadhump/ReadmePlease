@@ -9,7 +9,7 @@ class ReadmePleaseCommand(sublime_plugin.WindowCommand):
 
   def run(self):
 
-    variations = ["README.*", "readme.*", "Readme.*", "ReadMe.*"]
+    variations = ["readme.*"]
 
     self.helps = []
 
