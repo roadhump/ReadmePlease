@@ -1,6 +1,15 @@
 import sublime
 import sublime_plugin
 
+import sys
+
+# On Windows and OSX, with (commonly) case-insensitive file systems,
+# don't bother trying different upper-/lower-case spellings
+if sys.platform in ('win32', 'darwin'):
+    README_PATTERNS = ['readme.*']
+else:
+    README_PATTERNS = ["readme.*", "README.*", "Readme.*", "ReadMe.*"]
+
 
 class ReadmePleaseCommand(sublime_plugin.WindowCommand):
 
@@ -9,22 +18,14 @@ class ReadmePleaseCommand(sublime_plugin.WindowCommand):
 
     def run(self):
 
-        variations = ["readme.*"]
-
         self.helps = []
 
-        for spelling in variations:
-            readmes = sublime.find_resources(spelling)
-
-            for readme in readmes:
-
-                package = (str(readme).split('/'))
-                plength = (len(package))
-
-                if plength == 3:
-                    package_name = package[plength - 2]
-                    readme_name = package[plength - 1]
-                    self.helps.append([package_name, readme_name, readme])
+        for spelling in README_PATTERNS:
+            for path in sublime.find_resources(spelling):
+                components = path.split('/')
+                if len(components) == 3:      # exclude files in package subdirs
+                    package_name, readme_name = components[-2:]
+                    self.helps.append([package_name, readme_name, path])
 
         self.helps.sort()
         self.window.show_quick_panel(list(map(
