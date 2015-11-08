@@ -4,7 +4,7 @@ ReadmePlease
 Overview
 --------
 
-ReadmePlease is a [Sublime Text 2/3](http://www.sublimetext.com/) plugin for quick access to README files of installed packages.
+ReadmePlease is a [Sublime Text 2/3](http://www.sublimetext.com/) plugin for quick access to README files of installed packages. See below for installation instructions.
 
 Installation
 ------------
